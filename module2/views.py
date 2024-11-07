@@ -12,11 +12,7 @@ class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
 
 @api_view(['GET'])
-def module2_view(request):
-    return Response({"message": "This is Module 2"})
-
-@api_view(['GET'])
-def get_client(request):
+def get_clients(request):
     client = Client.objects.get(pk=1)
     serializer = ClientSerializer(client)
     return Response(serializer.data)
