@@ -42,6 +42,7 @@ def create_client(request):
             client = form.save(commit=False)
             # Obtener el ID de la compañía y buscar la instancia de Company
             company_id = form.cleaned_data['company']
+            print(f"company_id: {company_id}, type: {type(company_id)}")
             company_instance = get_object_or_404(Company, id=company_id)
             client.company = company_instance
             client.save()
