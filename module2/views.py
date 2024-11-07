@@ -32,12 +32,9 @@ def client_list(request):
 
 def create_client(request):
     # Fetch company data from API
-    api_url = os.environ.get('COMPANY_API_URL', 'http://127.0.0.1:8000/module1/api/get-companies')
-    try:
-        response = requests.get(api_url)
-        companies = response.json()
-    except requests.RequestException:
-        companies = []
+    companies = []
+    #get compnies from model Client
+    companies = Client.objects.values_list('company', flat=True).distinct()
 
     if request.method == 'POST':
         form = ClientForm(request.POST, companies=companies)
