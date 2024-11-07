@@ -7,6 +7,7 @@ from .models import Client
 from .serializers import ClientSerializer
 from .forms import ClientForm
 import requests
+from module1.models import Company
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
@@ -34,7 +35,7 @@ def create_client(request):
     # Fetch company data from API
     companies = []
     #get compnies from model Client
-    companies = Client.objects.values_list('company', flat=True).distinct()
+    companies = Company.objects.all()
 
     if request.method == 'POST':
         form = ClientForm(request.POST, companies=companies)

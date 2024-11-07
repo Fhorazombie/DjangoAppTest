@@ -1,5 +1,5 @@
 from django.db import models
-from module1.models import Companies
+from module1.models import Company
 
 # Create your models here.
 class Module2Model(models.Model):
@@ -16,7 +16,7 @@ class Client(models.Model):
     address = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
-    company = models.ForeignKey(Companies, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE,null=True, blank=True)
     
     def __str__(self):
         return self.name

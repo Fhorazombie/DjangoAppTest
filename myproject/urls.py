@@ -20,6 +20,6 @@ from .views import menu_view
 urlpatterns = [
     path('', menu_view, name='menu'),
     path('admin/', admin.site.urls),
-    #path('module1/', include('module1.urls')),
+    path('module1/', include('module1.urls')),
     path('module2/', include('module2.urls')),
 ]
