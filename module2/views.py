@@ -8,7 +8,7 @@ from .serializers import ClientSerializer
 from .forms import ClientForm
 import requests
 from module1.models import Company
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
@@ -33,16 +33,16 @@ def client_list(request):
     return render(request, 'module2/client_list.html', {'clients': clients})
 
 def create_client(request):
-    # Obtén la lista de compañías para el formulario
+    # Obtén todas las compañías para pasar como choices al formulario
     companies = Company.objects.all()
 
     if request.method == 'POST':
         form = ClientForm(request.POST, companies=companies)
         if form.is_valid():
             client = form.save(commit=False)
-            # Asegúrate de obtener el ID como entero y luego obtén la instancia de Company
+            # Obtener el ID de la compañía y buscar la instancia de Company
             company_id = form.cleaned_data['company']
-            company_instance = get_object_or_404(Company, id=int(company_id))
+            company_instance = get_object_or_404(Company, id=company_id)
             client.company = company_instance
             client.save()
             return redirect('client-list')
