@@ -39,13 +39,7 @@ def create_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST, companies=companies)
         if form.is_valid():
-            client = form.save(commit=False)
-            # Obtener el ID de la compañía y buscar la instancia de Company
-            company_id = form.cleaned_data['company']
-            print(f"company_id: {company_id}, type: {type(company_id)}")
-            company_instance = get_object_or_404(Company, id=company_id)
-            client.company = company_instance
-            client.save()
+            form.save()  # Ahora puedes guardar directamente
             return redirect('client-list')
     else:
         form = ClientForm(companies=companies)
