@@ -16,9 +16,11 @@ def module2_view(request):
     return Response({"message": "This is Module 2"})
 
 @api_view(['GET'])
-def get_companies(request):
-    module1_url = os.environ.get('MODULE1_URL', 'http://localhost:8000')
-    response = requests.get(f'{module1_url}/api/companies/')
-    if response.status_code == 200:
-        return Response(response.json())
-    return Response({"error": "Unable to fetch companies"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+def get_client(request):
+    client = Client.objects.get(pk=1)
+    serializer = ClientSerializer(client)
+    return Response(serializer.data)
+
+def client_list(request):
+    clients = Client.objects.all()
+    return render(request, 'module2/client_list.html', {'clients': clients})

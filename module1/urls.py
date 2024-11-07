@@ -6,7 +6,8 @@ router = DefaultRouter()
 router.register(r'companies', views.CompanyViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', views.company_list, name='company-list'),
     path('module1/', views.module1_view, name='module1'),
-    path('get-clients/', views.get_clients, name='get-clients'),
+    path('get-company/', views.get_company, name='get-company'),
+    path('company-list/', views.company_list, name='company-list'),
 ]

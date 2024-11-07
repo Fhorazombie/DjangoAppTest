@@ -12,13 +12,11 @@ class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
 
 @api_view(['GET'])
-def module1_view(request):
-    return Response({"message": "This is Module 1"})
+def get_company(request):
+    company = Company.objects.get(pk=1)
+    serializer = CompanySerializer(company)
+    return Response(serializer.data)
 
-@api_view(['GET'])
-def get_clients(request):
-    module2_url = os.environ.get('MODULE2_URL', 'http://localhost:8001')
-    response = requests.get(f'{module2_url}/api/clients/')
-    if response.status_code == 200:
-        return Response(response.json())
-    return Response({"error": "Unable to fetch clients"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+def company_list(request):
+    companies = Company.objects.all()
+    return render(request, 'module1/company_list.html', {'companies': companies})
