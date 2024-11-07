@@ -14,9 +14,17 @@ class ClientViewSet(viewsets.ModelViewSet):
 
 @api_view(['GET'])
 def get_clients(request):
-    client = Client.objects.get(pk=1)
-    serializer = ClientSerializer(client)
+    clients = Client.objects.all()
+    serializer = ClientSerializer(clients, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def get_clients_byid(request):
+    company_id = request.GET.get('id')
+    clients = Client.objects.filter(company=company_id)
+    serializer = ClientSerializer(clients, many=True)
+    return Response(serializer.data)
+
 
 def client_list(request):
     clients = Client.objects.all()

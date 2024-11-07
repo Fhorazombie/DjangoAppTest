@@ -42,20 +42,22 @@
     </div>
 
     <script>
-        const companiesData = {{ companies|safe }};
         function showClients(companyId) {
-            const clientPopup = document.getElementById('clientPopup');
-            const clientList = document.getElementById('clientList');
-            clientList.innerHTML = '';
+            // request to get clients of the company
+            fetch(`/module2/api/get-clients-byid/?id=${companyId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const clientList = document.getElementById('clientList');
+                    clientList.innerHTML = '';
+                    data.forEach(client => {
+                        const li = document.createElement('li');
+                        li.textContent = client.name;
+                        clientList.appendChild(li);
+                    });
 
-            const company = companiesData.find(c => c.id === companyId);
-            company.clients.forEach(client => {
-                const li = document.createElement('li');
-                li.textContent = `${client.name} - ${client.email}`;
-                clientList.appendChild(li);
-            });
-
-            clientPopup.style.display = 'block';
+                    const clientPopup = document.getElementById('clientPopup');
+                    clientPopup.style.display = 'block';
+                });
         }
 
         function closePopup() {
