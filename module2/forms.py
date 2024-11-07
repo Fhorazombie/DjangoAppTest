@@ -17,4 +17,4 @@ class ClientForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         companies = kwargs.pop('companies', [])
         super().__init__(*args, **kwargs)
-        self.fields['company'].choices = [(c['id'], c['name']) for c in companies]
+        self.fields['company'].choices = [(c.id, c.name) for c in companies]
