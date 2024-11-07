@@ -40,9 +40,10 @@ def create_client(request):
         form = ClientForm(request.POST, companies=companies)
         if form.is_valid():
             client = form.save(commit=False)
-            # Convierte el ID a entero y obtén la instancia de Company
-            company_id = int(form.cleaned_data['company'])
-            client.company = get_object_or_404(Company, id=company_id)
+            # Asegúrate de obtener el ID como entero y luego obtén la instancia de Company
+            company_id = form.cleaned_data['company']
+            company_instance = get_object_or_404(Company, id=int(company_id))
+            client.company = company_instance
             client.save()
             return redirect('client-list')
     else:
