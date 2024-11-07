@@ -1,0 +1,10 @@
+# .env
+SECRET_KEY='your-secret-key'
+DEBUG=True
+DATABASE_NAME=djangoapptest
+DATABASE_USER=postgres
+DATABASE_PASSWORD=123456
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+COMPANY_API_URL=http://127.0.0.1:8000/module1/api/get-companies
+CLIENTS_API_URL=http://127.0.0.1:8000/module2/api/get-clients-byid

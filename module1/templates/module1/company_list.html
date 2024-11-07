@@ -43,7 +43,7 @@
 
     <script>
         function showClients(companyId) {
-            requesturl = "{% os.environ.get('COMPANY_API_URL',`http://localhost:8000/module2/api/get-clients-byid/?id=${companyId}` ) %}";
+            requesturl = `{{ url_getclientsbycompany }}/?id=${companyId}`;
             // request to get clients of the company
             fetch(requesturl)
                 .then(response => response.json())

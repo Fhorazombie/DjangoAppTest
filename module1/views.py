@@ -44,7 +44,8 @@ def get_company(request):
 
 def company_list(request):
     companies = Company.objects.all()
-    return render(request, 'module1/company_list.html', {'companies': companies})
+    url_getclientsbycompany = os.environ.get('CLIENTS_API_URL','http://127.0.0.1:8000/module2/api/get-clients-by-company')
+    return render(request, 'module1/company_list.html', {'companies': companies, 'url_getclientsbycompany': url_getclientsbycompany})
 
 def company_create(request):
     if request.method == 'POST':

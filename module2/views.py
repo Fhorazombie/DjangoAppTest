@@ -32,7 +32,7 @@ def client_list(request):
 
 def create_client(request):
     # Fetch company data from API
-    api_url = os.environ.get('COMPANY_API_URL', 'http://localhost:8000/module1/api/get-companies')
+    api_url = os.environ.get('COMPANY_API_URL', 'http://127.0.0.1:8000/module1/api/get-companies')
     try:
         response = requests.get(api_url)
         companies = response.json()
