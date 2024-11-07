@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Client</title>
+</head>
+<body>
+
+{% block content %}
+  <h2>Create New Client</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Client</button>
+  </form>
+
+  <h3>Available Companies</h3>
+  <ul>
+    {% for company in companies %}
+      <li>{{ company.name }} (ID: {{ company.id }})</li>
+    {% empty %}
+      <li>No companies available</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+<a href="{% url 'client-list' %}">Back to Client List</a>
+</body>
+</html>

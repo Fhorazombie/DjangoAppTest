@@ -37,9 +37,10 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
 @api_view(['GET'])
 def get_company(request):
-    company = Company.objects.get(pk=1)
-    serializer = CompanySerializer(company)
-    return Response(serializer.data)
+    company = Company.objects.all()
+    serializer = CompanySerializer(company, many=True)
+    data = serializer.data
+    return Response(data)
 
 def company_list(request):
     companies = Company.objects.all()

@@ -15,7 +15,7 @@ class Client(models.Model):
     address = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
-    company = models.ForeignKey('module1.Company', on_delete=models.CASCADE, related_name='clients')
+    company = models.IntegerField(null=True, blank=True)
     
     def __str__(self):
         return self.name

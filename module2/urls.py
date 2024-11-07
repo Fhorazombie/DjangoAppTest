@@ -6,7 +6,7 @@ router = DefaultRouter()
 router.register(r'clients', views.ClientViewSet)
 
 urlpatterns = [
-    path('', views.client_list),
+    path('', views.client_list, name='client-list'),
     path('get-clients/', views.get_clients, name='get-clients'),
-    path('client-list/', views.client_list, name='client-list'),
+    path('create/', views.create_client, name='create_client'),
 ]
